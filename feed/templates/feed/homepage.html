@@ -1,14 +1,12 @@
 {%  extends "base.html"  %}
+{% load thumbnail %}
 
 {%  block title  %}homepage{%  endblock  %}
 
 
 
 {%  block body  %}
-hello world from "feed/templates/homepage.html"
-
 {% comment %} {% thumbnail item.image "100x100" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
 {% endthumbnail %} {% endcomment %}
-
 {%  endblock  %}

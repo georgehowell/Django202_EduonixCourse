@@ -6,4 +6,6 @@ app_name = "feed"
 urlpatterns = [
     path("", views.HomePage.as_view(), name="index"),
     # path("login-page", views.LoginPage.as_view(), name="login-page")
+    path("<int:pk>/", views.PostDetailView.as_view(), name="detail"),
+    path("new/", views.CreateNewPost.as_view(), name="new_post")
 ]

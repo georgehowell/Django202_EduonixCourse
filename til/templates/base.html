@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,11 @@
     <hr>
 
     {%  block body  %}{%  endblock %}
+    {% block modal %}{% include 'includes/modal.html' %}{% endblock modal %}
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/ajaxSetup.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <script src="https://flowbite.com/docs/flowbite.min.js?v=1.6.6a"></script>
 
 </body>

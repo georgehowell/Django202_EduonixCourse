@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}{{ post.heading }}, by {{ post.author.username }}{% endblock %}
+
+{% block body %}
+
+
+
+<div class="mt-6 bg-gray-50">
+    <div class=" px-10 py-6 mx-auto">
+          
+          <!--author-->
+    <div class="max-w-6xl px-10 py-6 mx-auto bg-gray-50">
+          
+        <a href="#_" class="block transition duration-200 ease-out transform hover:scale-110">
+            <img class="object-cover w-full shadow-sm h-full" src="/media/{{ post.author.profile.image }}">
+        </a>
+
+          <!--post categories-->
+        <div class="flex items-center justify-start mt-4 mb-4">
+            <a href="#"class="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500 mr-4">Django</a>
+            <a href="#"class="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500 mr-4">Python</a>
+            <a href="#"class="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500">web development</a>
+        </div>
+          <div class="mt-2">
+              <!--post heading-->
+              <a href="#"
+                  class="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-purple-500  hover:underline">{{ post.heading }}</a>
+                  <!--author avator-->
+                 <div class="font-light text-gray-600">
+                    
+                      <a href="#" class="flex items-center mt-6 mb-6">
+                        {% thumbnail post.author.profile.image "100x100" crop="center" as img %}
+                            <img src="{{ img.url }}" class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" alt="{{post.author.username}}" />
+                        {% endthumbnail %} 
+                        <h1 class="font-bold text-gray-700 hover:underline">{{ post.author.username }} &nbsp; | &nbsp; {{ post.date|date:"F j, Y, g:i a" }}  </h1>
+                      </a>
+                </div>
+         </div>
+      
+         <!--end post header-->
+              <!--post content-->
+   <div class="max-w-4xl px-10  mx-auto text-2xl text-gray-700 mt-4 rounded bg-gray-100">
+       <!--content body-->
+       <div>
+              <p class="mt-2 p-8">If you created a web application and wanted it to grow a user base reall quickly,
+                the easiest way is to avoid bothering them with alot forms. No one likes filling up forms! A web 
+                form should and must only be used when necessary,in case a user doesnt have account with any of 
+                the social networks.That is the moment you want to implement social login on your application.</p>
+       </div>
+    </div>
+    <div class="mt-6">
+      <a href="{% url 'feed:index' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">&larr; Back</a>
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}
