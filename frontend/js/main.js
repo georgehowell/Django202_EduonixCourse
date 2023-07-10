@@ -32,5 +32,34 @@ $(document).on("click", ".js-toggle-modal", function(e) {
             console.warn(error)
             $btn.prop("disabled", false).text("Error");
         }
-    });
+    })
+})
+.on("click", ".js-follow", function(e) {
+    e.preventDefault();
+
+    console.log("clicked");
+
+    const action = $(this).attr("data-action")
+
+    $.ajax({
+        type: "POST",
+        url: $(this).data("url"),  
+        data: {
+            action: action,
+            username: $(this).data("username"),
+        },
+        success: (data) => {
+            $(".js-follow-text").text(data.wording)
+            if(action == "follow") {
+                // Change wording to "unfollow"
+                $(this).attr("data-action", "unfollow")
+            } else {
+                // Change wording to "follow"
+                $(this).attr("data-action", "follow")
+            }
+        },
+        error: (error) => {
+            console.warn(error)
+        }
+    })
 })

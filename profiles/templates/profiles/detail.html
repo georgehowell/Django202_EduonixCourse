@@ -6,24 +6,41 @@
 {% block body %}
 
 <!-- component -->
-<div class="rounded-3xl overflow-hidden shadow-xl max-w-xs my-3 bg-blue-500">
-    {% thumbnail post.author.profile.image "100x100" crop="center" as img %}
-        <img src="{{ img.url }}" class="w-full mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" alt="{{post.author.profile.image}}" />
+<div class="rounded-3xl overflow-hidden shadow-xl max-w-xs my-3 mx-auto bg-blue-500" style="background: #3c0df6 url(https://georgehowell.com.au/mobile/img/inside-cube-2.gif) top center no-repeat;background-size: contain;">
+    {% thumbnail user.profile.image "120x120" crop="center" as img %}
+        <img src="{{ img.url }}" class="mx-auto mt-20 rounded-full shadow-xl" alt="{{ user.username }}" />
     {% endthumbnail %}      
-  <div class="flex justify-center -mt-8">
-      <img src="https://i.imgur.com/8Km9tLL.jpg" class="rounded-full border-solid border-white border-2 -mt-3">		
-  </div>
   <div class="text-center px-3 pb-6 pt-2">
       <h3 class="text-white text-sm bold font-sans">{{ user.username }}</h3>
-      <p class="mt-2 font-sans font-light text-white">{{ post.text }}</p>
+{% if request.user.is_authenticated %}
+    {% if request.user != user %}
+        <button class="js-follow bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 mt-4 inline-flex items-center"
+        data-action="{% if you_follow %}un{% endif %}follow" 
+        data-url="{% url 'profiles:follow' user.username %}" type="button" data-username="{{ user.username }}"
+        >
+        <span class="mr-2 js-follow-text">
+            {% if you_follow %}
+                Unfollow
+            {% else %}
+                Follow
+            {% endif %}
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+        </svg>
+        </button>
+    {% endif %}
+    {% else %}
+    <div class="mt-3 text-sm text-white">Login to follow this user</div>
+{% endif %}
   </div>
     <div class="flex justify-center pb-3 text-white">
     <div class="text-center mr-3 border-r pr-3">
-      <h2>xx {#  TODO:   Add total posts  #}</h2>
-      <span>Photos</span>
+      <h2>{{ total_posts }}</h2>
+      <span>Posts</span>
     </div>
     <div class="text-center">
-        <h2>xx {#  TODO:   Add total followers  #}</h2>
+        <h2>{{ following }}</h2>
         <span>Followers</span>
     </div>
     </div>
